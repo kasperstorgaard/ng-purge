@@ -9,5 +9,11 @@ const fullPath = path.join(__dirname, args.dir || '');
 const types = ['service', 'controller', 'factory'];
 finder.find(fullPath, types)
     .then(matches => {
-        console.log(matches.factory.size);
+        let val;
+        let count = 0;
+        for (val of matches.factory.values()) {
+            console.log(val);
+            count++;
+        }
+        console.log('-------------- \ncount', count);
     });
