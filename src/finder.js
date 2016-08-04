@@ -5,14 +5,14 @@ const defaultOptions = {
     excludeDir: ['node_modules', 'bower']
 };
 
-function addMatches (content, test, matches) {
+function addMatches (content, fileName, test, matches) {
     let match = test.exec(content);
     while (match) {
         const type = match[1];
         const name = match[2];
 
         const obj = matches[type] || new Map();
-        obj.set(name, true);
+        obj.set(name, fileName);
 
         if (!matches[type]) {
             Object.assign(matches, { [type]: obj });
@@ -32,9 +32,9 @@ function find (dirPath, types, options = {}) {
 
     return new Promise(resolve => {
         const opts = Object.assign({}, defaultOptions, options);
-        dir.readFiles(dirPath, opts, (err, content, next) => {
+        dir.readFiles(dirPath, opts, (err, content, fileName, next) => {
             if (err) { throw err; }
-            matches = addMatches(content, test, matches);
+            matches = addMatches(content, fileName, test, matches);
             next();
         }, () => {
             resolve(matches);
