@@ -1,0 +1,23 @@
+{
+  "name": "ng-purge",
+  "version": "0.1.0",
+  "description": "a utility to find unused angular 1.x code/files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "angular",
+    "clean",
+    "code",
+    "analysis",
+    "purge",
+    "ng"
+  ],
+  "author": "kasperstorgaard",
+  "license": "ISC",
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "node-dir": "^0.1.15"
+  }
+}
