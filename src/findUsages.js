@@ -3,12 +3,29 @@ const path = require('path');
 const async = require('async');
 
 function createServiceTest (name) {
-    // find "function" or "=> "
-    // followed by anything, 
-    // followed by {name} surrounded in whitespace or comma
+    // name wrapped in whitespace or comma
+    const midMatch = `[\\s,]${name}[\\s,]`;
+
+    // function with a parenthesis
     // followed by anything
-    // followed by parenthesis end
-    return new RegExp(`(function|=>\\s?)\\s?[\\s\\S]*[\\s,]${name}[\\s,][\\s\\S]*\\)`, 'g');
+    // followed by midmatch
+    // followed by anything
+    // followed by parenthesis
+    const funcMatch = `function\\s?\\([\\s\\S]*${midMatch}[\\s\\S]*\\)`;
+
+    // name
+    // followed by arrow
+    // OR
+    // parenthesis
+    // followed by anything
+    // followed by midmatch
+    // followed by anything
+    // followed by parenthesis
+    // followed by arrow
+    const esFuncMatch = `(${name}|\\([\\s\\S]*${midMatch}[\\s\\S]*\\))\\s?=>`;
+
+    // esFuncMatch OR funcMatch globally
+    return new RegExp(`(${esFuncMatch}|${funcMatch})`, 'g');
 }
 
 function getMatches (test, content) {
