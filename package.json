@@ -17,6 +17,8 @@
   "author": "kasperstorgaard",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.0.1",
+    "chalk": "^1.1.3",
     "minimist": "^1.2.0",
     "node-dir": "^0.1.15"
   }
